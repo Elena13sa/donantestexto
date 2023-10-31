@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario de Donante</title>
+</head>
+<body>
+    <h1>Formulario de Donante</h1>
+
+    <form id="donanteForm">
+        <label for="nombre">Nombre del Donante:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="celular">Celular del Donante:</label>
+        <input type="tel" id="celular" name="celular" required><br><br>
+
+        <label for="correo">Correo del Donante:</label>
+        <input type="email" id="correo" name="correo" required><br><br>
+
+        <label for="numero-operacion">Número de Operación:</label>
+        <input type="text" id="numero-operacion" name="numero-operacion" required><br><br>
+
+        <button type="button" onclick="generarParrafo()">Generar</button>
+    </form>
+
+    <p id="datosDonante"></p>
+    
+    <button type="button" id="copiarTexto" style="display: none" onclick="copiarTextoGenerado()">Copiar Texto</button>
+    
+    <p id="gmailLink" style="display: none">Abrir Gmail web para pegar frase: <a href="https://mail.google.com/mail/u/0/#inbox?compose=new" target="_blank">https://mail.google.com/mail/u/0/#inbox</a></p>
+
+    <script>
+        function generarParrafo() {
+            var nombreDonante = document.getElementById("nombre").value;
+            var celularDonante = document.getElementById("celular").value;
+            var correoDonante = document.getElementById("correo").value;
+            var numeroOperacion = document.getElementById("numero-operacion").value;
+
+            var parrafo = "¡Salve María! Nuestra Sra le bendiga, copio los datos de la siguiente donación para la construcción del centro Mariano San José:<br><br>";
+            parrafo += "Nombre del Donante: " + nombreDonante + "<br>";
+            parrafo += "Celular del Donante: " + celularDonante + "<br>";
+            parrafo += "Correo del Donante: " + correoDonante + "<br>";
+            parrafo += "Número de Operación: " + numeroOperacion + "<br><br>";
+            parrafo += "San José bendiga su familia y su trabajo.";
+
+            document.getElementById("datosDonante").innerHTML = parrafo;
+            
+            // Mostrar el botón "Copiar Texto" después de generar el párrafo
+            document.getElementById("copiarTexto").style.display = "block";
+
+            // Mostrar el enlace a Gmail
+            document.getElementById("gmailLink").style.display = "block";
+        }
+
+        function copiarTextoGenerado() {
+            var textoGenerado = document.getElementById("datosDonante");
+            var seleccion = document.createRange();
+            seleccion.selectNode(textoGenerado);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(seleccion);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+        }
+    </script>
+</body>
+</html>
